@@ -10,5 +10,5 @@ __employment_success_analyst.py__ calculates various metrics of the success rate
 * refactor the code - there's lots of scope for reusable code
 * create classes (student class, cohort class)
 * create a master function that covers multiple cohorts
-* turn this into a web app
+* get user input. Using the terminal, this this might be a bit too much effort for a user, so a web app might be more appropriate.
 
