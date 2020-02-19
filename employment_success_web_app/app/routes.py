@@ -17,8 +17,9 @@ def show_students(): # MODIFIED
     students_in_software_jobs = calculator.count_students_in_software_jobs(students)
     percentage_of_employed_students = calculator.calculate_percentage_of_employed_students(students)
     percentage_in_software_jobs = calculator.calculate_percentage_in_software_jobs(students)
+    non_software = calculator.calculate_percentage_of_students_not_in_software_role(students)
     return render_template('students.html', title='Students', students=students, number_of_students=number_of_students, employed_students=employed_students,
-    students_in_software_jobs=students_in_software_jobs, percentage_of_employed_students=percentage_of_employed_students, percentage_in_software_jobs=percentage_in_software_jobs)
+    students_in_software_jobs=students_in_software_jobs, percentage_of_employed_students=percentage_of_employed_students, percentage_in_software_jobs=percentage_in_software_jobs, non_software=non_software)
 
     
      

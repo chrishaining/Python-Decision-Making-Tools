@@ -16,3 +16,19 @@ There is a problem with calculating how long it takes a graduate to get a job: i
 * get user input. Using the terminal, this this might be a bit too much effort for a user, so a web app might be more appropriate.
 * five-number summary, to show the range of unemployment times
 
+---
+# Web app 
+
+The web app is based on the functions from __employment_success_analyst.py__. It uses the Flask framework.
+
+## Problems and solutions
+There were problems trying to migrate the database, and the following error message came up:
+
+```INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+    INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+    ERROR [root] Error: Target database is not up to date.```
+
+To fix this, I followed instructions found on [Stack Overflow](https://stackoverflow.com/questions/17768940/target-database-is-not-up-to-date):
+```flask db stamp head
+    $ flask db migrate
+    $ flask db upgrade```

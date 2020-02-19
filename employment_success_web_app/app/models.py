@@ -1,14 +1,25 @@
 from app import db
 import datetime
 
+# create a cohort class. this will have an ID, graduation date, and list of students (many students to one cohort). I can also give it a name, though this isn't vital (I could use the id as a sort of name)
+class Cohort(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    cohort_name = db.Column(db.String(64), index=True, nullable=False)
+    graduation_date = db.Column(db.DateTime(), default=datetime.datetime.utcnow, nullable=True)
+    students = db.relationship('Student', backref='cohort', lazy='dynamic')
+
+    def __repr__(self):
+        return '<Cohort {}>'.format(self.cohort_name)
+
 # create a student class, rather than a graduate class - the student class allows for more extendability (e.g. to monitor dropout rate). For the employed and software_job attributes, I've used Booleans, but an extension might be to create choices (e.g. instead of employed we could have an employment_status that might include further study). Also, it may help to add a choice of cohort.
 class Student(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    first_name = db.Column(db.String(64), nullable=False)
-    last_name = db.Column(db.String(64), index=True, nullable=False)
+    first_name = db.Column(db.String(64), nullable=True)
+    last_name = db.Column(db.String(64), index=True, nullable=True)
     employed = db.Column(db.Boolean, default = False, nullable=True)
     start_date = db.Column(db.DateTime(), nullable=True)
     software_job = db.Column(db.Boolean, default=False, nullable=True)
+    cohort_id = db.Column(db.Integer, db.ForeignKey('cohort.id'))
     
     def __repr__(self):
         return '<Student {} {}>'.format(self.first_name, self.last_name)
@@ -47,3 +58,58 @@ class Calculator:
         percentage = round((employed_students / total_students) * 100, 1)
         return percentage
  
+
+#  //////
+# def calculate_average_days_to_get_software_job(self, cohort):
+#     graduation_date = cohort["graduation_date"]
+#     differences = []
+#     for student in cohort["students"]:
+#         if student["software_job"] == True:
+#             difference = student["start_date"] - graduation_date
+#             differences.append(difference)
+#     average_days = np.mean(differences).days
+#     return average_days
+
+#     # return graduation_month.strftime("%B")
+
+
+# # try to calculate average months to get software job
+
+# def calculate_average_months_to_get_software_job(self, cohort):
+#     graduation_date = cohort["graduation_date"]
+#     differences = []
+#     for student in cohort["students"]:
+#         if student["software_job"] == True:
+#             difference = relativedelta.relativedelta(student["start_date"], graduation_date)
+#             differences.append(difference.months)
+#     average_months = np.mean(differences)
+#     adjusted_months = round(average_months, 1)
+#     return adjusted_months
+
+# # function to calculate the % of students in software role after 1 month.
+# # function to calculate the % of students in software role after 3 months.
+# # function to calculate the % of students in software role after 6 months.
+# # These are actually the same function, but using a different argument.
+# def calculate_percentage_of_students_in_software_role(self, cohort, months_after_graduation):
+#     employed_graduates = []
+#     graduates = count_cohort_graduates(cohort)
+#     graduation_date = cohort["graduation_date"]
+#     for student in cohort["students"]:
+#         if student["software_job"] == True:
+#             difference = relativedelta.relativedelta(student["start_date"], graduation_date)
+#             if difference.months <= months_after_graduation:
+#                 employed_graduates.append(student)
+#     percentage = (len(employed_graduates) / graduates) * 100
+#     return percentage
+
+
+
+# # function to calculate the % of students who do not get a software role. 
+    def calculate_percentage_of_students_not_in_software_role(self, cohort):
+        non_software_students = []
+        total_students = self.count_students(cohort)
+        for student in cohort:
+            if student.software_job == False:
+                non_software_students.append(student)
+        percentage = round((len(non_software_students) / total_students) * 100, 1)
+        return percentage
