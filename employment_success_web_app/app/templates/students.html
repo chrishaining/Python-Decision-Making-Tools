@@ -31,22 +31,35 @@
     </div>
 
     <div class="row">
+        <h2>Some stats</h2>
+        <ul>
+            <li>There are {{number_of_students}} students.</li>
+            <li>{{employed_students}} of these students are employed.</li>
+            <li>{{students_in_software_jobs}} of these students have a software job.</li>
+            <li>{{percentage_of_employed_students}} % of students are employed.</li>
+            <li>{{percentage_in_software_jobs}} % of students have a software job.</li>
+        </ul>
+
+
+    </div>
+
+    <div class="row">
         <h2>Add a new student</h2>
-        <form action=" /students " method="POST ">
-            <label for="first_name ">First Name</label>
-            <input type="text " name="first_name " id="first_name " />
-            <label for="last_name ">Last Name</label>
-            <input type="text " name="last_name " id="last_name " />
+        <form action="/students" method="POST">
+            <label for="first_name">First Name</label>
+            <input type="text" name="first_name" id="first_name" required/>
+            <label for="last_name">Last Name</label>
+            <input type="text" name="last_name" id="last_name" required/>
             <!-- <label for="employed ">Is this student employed?</label>
         <input type="checkbox " checked name="employed " id="employed " disabled/> -->
 
 
-            <label for="start_date ">What date did they start their job?</label>
-            <input type="date " name="start_date " id="start_date " />
+            <label for="start_date">What date did they start their job?</label>
+            <input type="date" name="start_date" id="start_date" />
             <!-- <label for="software_job ">Do they have a software job?</label>
         <input type="checkbox " checked name="software_job " id="software_job " disabled/> -->
 
-            <input type="submit " value="Add Student ">
+            <button type="submit" class="save btn btn-default" value="Add Student">Add Student</button>
         </form>
     </div>
 
