@@ -5,17 +5,29 @@
 </div>
 
 <div>
+    <h2>Here are the students</h2>
+    <ul>
+        {% for student in students %}
+        <li>{{student.first_name}} {{student.last_name}}</li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div>
+    <h2>Add a new student</h2>
     <form action="/students" method="POST">
         <label for="first_name">First Name</label>
         <input type="text" name="first_name" id="first_name" />
         <label for="last_name">Last Name</label>
         <input type="text" name="last_name" id="last_name" />
-        <label for="employed">Is this student employed?</label>
-        <input type="text" name="employed" id="employed" />
+        <!-- <label for="employed">Is this student employed?</label>
+        <input type="checkbox" checked name="employed" id="employed" disabled/> -->
+
+
         <label for="start_date">What date did they start their job?</label>
-        <input type="text" name="start_date" id="start_date" />
-        <label for="software_job">Do they have a software job?</label>
-        <input type="text" name="software_job" id="software_job" />
+        <input type="date" name="start_date" id="start_date" />
+        <!-- <label for="software_job">Do they have a software job?</label>
+        <input type="checkbox" checked name="software_job" id="software_job" disabled/> -->
 
         <input type="submit" value="Add Student">
     </form>
