@@ -6,11 +6,15 @@
 
 <div>
     <h2>Here are the students</h2>
+    {% for student in students %}
     <ul>
-        {% for student in students %}
         <li>{{student.first_name}} {{student.last_name}}</li>
-        {% endfor %}
+        <li> Employed? {{student.employed}}</li>
+        <li> Date they got a job? {{student.start_date}}</li>
+        <li> Do they have a software job? {{student.software_job}}</li>
+
     </ul>
+    {% endfor %}
 </div>
 
 <div>
