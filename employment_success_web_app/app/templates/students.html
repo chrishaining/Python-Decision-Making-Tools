@@ -6,15 +6,27 @@
 
 <div>
     <h2>Here are the students</h2>
-    {% for student in students %}
-    <ul>
-        <li>{{student.first_name}} {{student.last_name}}</li>
-        <li> Employed? {{student.employed}}</li>
-        <li> Date they got a job? {{student.start_date}}</li>
-        <li> Do they have a software job? {{student.software_job}}</li>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Employed?</th>
+                <th>Employment start date</th>
+                <th>Software job?</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in students %}
+            <tr>
+                <td>{{student.first_name}} {{student.last_name}}</td>
+                <td> {{student.employed}}</td>
+                <td> {{student.start_date}}</td>
+                <td> {{student.software_job}}</td>
+            </tr>
+            {% endfor %}
 
-    </ul>
-    {% endfor %}
+        </tbody>
+    </table>
 </div>
 
 <div>
