@@ -12,3 +12,5 @@ class Student(db.Model):
     
     def __repr__(self):
         return '<Student {} {}>'.format(self.first_name, self.last_name)
+
+# I'm going to attempt to do the calculations within a class (the other option would be to do all the functions in routes.py)
