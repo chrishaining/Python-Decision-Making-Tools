@@ -1,0 +1,26 @@
+{% extends "base.html" %} {% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <h1>Hi!</h1>
+        <p>Welcome to the statistics page</p>
+    </div>
+
+
+
+    <div class="row">
+        <h2>Some stats</h2>
+        <ul>
+            <li>There are {{number_of_students}} students.</li>
+            <li>{{employed_students}} of these students are employed.</li>
+            <li>{{students_in_software_jobs}} of these students have a software job.</li>
+            <li>{{percentage_of_employed_students}} % of students are employed.</li>
+            <li>{{percentage_in_software_jobs}} % of students have a software job.</li>
+            <li>{{non_software}} % of students are not in a software job.</li>
+
+        </ul>
+
+
+    </div>
+
+</div>
+{% endblock %}
