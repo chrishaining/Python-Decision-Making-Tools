@@ -17,6 +17,13 @@ a:hover {
 }
 
 
+/* rows */
+
+.row {
+    margin: 10px
+}
+
+
 /* navbar */
 
 nav {
