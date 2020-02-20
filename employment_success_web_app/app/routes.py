@@ -1,5 +1,5 @@
 from app import app, db
-from app.models import Student, Calculator
+from app.models import Student, Calculator, SurveyReader
 from flask import render_template, request, redirect
 import datetime
 
@@ -52,3 +52,10 @@ def show_statistics():
     non_software = calculator.calculate_percentage_of_students_not_in_software_role(students)
     return render_template('statistics.html', title='Statistics', students=students, number_of_students=number_of_students, employed_students=employed_students,
     students_in_software_jobs=students_in_software_jobs, percentage_of_employed_students=percentage_of_employed_students, percentage_in_software_jobs=percentage_in_software_jobs, non_software=non_software)
+
+@app.route('/surveys')
+def show_surveys(): 
+    # text2 = "I am a little fish. I love to eat maggots. And other fish. Mmm - maggots. Also, flies and algae."
+    surveyReader = SurveyReader()
+    cloud1 = surveyReader.create_word_cloud()
+    return render_template('surveys.html', title='Surveys', cloud1=cloud1)

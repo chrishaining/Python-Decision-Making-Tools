@@ -113,3 +113,21 @@ class Calculator:
                 non_software_students.append(student)
         percentage = round((len(non_software_students) / total_students) * 100, 1)
         return percentage
+
+# create a survey reader
+import matplotlib.pyplot as pPlot
+from wordcloud import WordCloud, STOPWORDS
+import numpy as np 
+from PIL import Image
+
+class SurveyReader:
+    def create_word_cloud(self):
+        # maskArray = np.array(Image.open("cloud.png"))
+        maskArray = Image.open("./templates/index.html")
+        # text1 = open("iliad.txt", "r").read().lower()
+        # text1 = open("survey.txt", "r").read().lower()
+        # cloud = WordCloud(background_color = "white", max_words = 200, mask = maskArray, stopwords = set(STOPWORDS))
+        # return cloud.generate(text1)
+        return maskArray
+        # clean_title = title.replace(" ", "")
+        # cloud.to_file("%swordCloud.png" % clean_title)
