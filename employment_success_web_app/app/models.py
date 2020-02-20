@@ -120,14 +120,38 @@ from wordcloud import WordCloud, STOPWORDS
 import numpy as np 
 from PIL import Image
 
+import re, nltk
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+from nltk.stem import WordNetLemmatizer
+from collections import Counter
+from app.part_of_speech import get_part_of_speech
+
+
 class SurveyReader:
-    def create_word_cloud(self):
+    # def create_word_cloud(self):
         # maskArray = np.array(Image.open("cloud.png"))
-        maskArray = Image.open("./templates/index.html")
+        # maskArray = Image.open("templates/index.html")
         # text1 = open("iliad.txt", "r").read().lower()
         # text1 = open("survey.txt", "r").read().lower()
         # cloud = WordCloud(background_color = "white", max_words = 200, mask = maskArray, stopwords = set(STOPWORDS))
         # return cloud.generate(text1)
-        return maskArray
+        # return maskArray
         # clean_title = title.replace(" ", "")
         # cloud.to_file("%swordCloud.png" % clean_title)
+
+    # importing regex and nltk
+
+
+# import the text
+    def word_count(self, survey):
+        # text1 = open(survey, encoding='utf-8').read().lower()
+        text1 = survey.lower()
+        cleaned = re.sub('\W+', ' ', text1).lower()
+        tokenized = word_tokenize(cleaned)
+        stop_words = stopwords.words('english')
+        filtered = [word for word in tokenized if word not in stop_words]
+        normalizer = WordNetLemmatizer()
+        normalized = [normalizer.lemmatize(token, get_part_of_speech(token)) for token in filtered]
+        bag_of_looking_glass_words = Counter(normalized)
+        return bag_of_looking_glass_words

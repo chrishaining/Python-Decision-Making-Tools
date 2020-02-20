@@ -6,18 +6,15 @@
     </div>
 
     <div class="row">
-        <p>{{ cloud1 }}</p>
+        <h2>Here's the survey</h2>
+        <p>{{ survey }}</p>
     </div>
 
-
     <div class="row">
-        <h2>Some survey highlights</h2>
-        <ul>
-            <li>"We love the course"</li>
-            <li>"It's hard, but it's harder to ignore it."</li>
-            <li>"I found a job I love!"</li>
-            <li>"The job hunt was tougher than I expected."</li>
-        </ul>
+        <h2>The frequency of words in the survey:</h2>
+        {% for word, frequency in word_count.items() %}
+        <p>{{ word }}: {{ frequency }}</p>
+        {% endfor %}
     </div>
 
 </div>

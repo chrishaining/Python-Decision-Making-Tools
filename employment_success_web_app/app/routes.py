@@ -57,5 +57,6 @@ def show_statistics():
 def show_surveys(): 
     # text2 = "I am a little fish. I love to eat maggots. And other fish. Mmm - maggots. Also, flies and algae."
     surveyReader = SurveyReader()
-    cloud1 = surveyReader.create_word_cloud()
-    return render_template('surveys.html', title='Surveys', cloud1=cloud1)
+    survey = "I am a little fish. I love to eat maggots. And other fish. Mmm - maggots. Also, flies and algae."
+    word_count = surveyReader.word_count(survey)
+    return render_template('surveys.html', title='Surveys', survey=survey, word_count=word_count)
