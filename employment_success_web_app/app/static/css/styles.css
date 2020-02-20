@@ -75,6 +75,14 @@ th {
     max-width: 300px
 }
 
+.table-hover tbody tr:hover th {
+    background-color: #ffd700
+}
+
+.table-hover tbody tr:hover td {
+    background-color: #ffd700
+}
+
 
 /* buttons */
 

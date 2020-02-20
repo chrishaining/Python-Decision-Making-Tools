@@ -50,8 +50,9 @@ def show_statistics():
     percentage_of_employed_students = calculator.calculate_percentage_of_employed_students(students)
     percentage_in_software_jobs = calculator.calculate_percentage_in_software_jobs(students)
     non_software = calculator.calculate_percentage_of_students_not_in_software_role(students)
+    employed_graph = calculator.bar_graph_of_employed_status(students)
     return render_template('statistics.html', title='Statistics', students=students, number_of_students=number_of_students, employed_students=employed_students,
-    students_in_software_jobs=students_in_software_jobs, percentage_of_employed_students=percentage_of_employed_students, percentage_in_software_jobs=percentage_in_software_jobs, non_software=non_software)
+    students_in_software_jobs=students_in_software_jobs, percentage_of_employed_students=percentage_of_employed_students, percentage_in_software_jobs=percentage_in_software_jobs, non_software=non_software, employed_graph=employed_graph)
 
 @app.route('/surveys')
 def show_surveys(): 

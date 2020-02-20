@@ -1,5 +1,6 @@
 from app import db
 import datetime
+import matplotlib.pyplot as plt
 
 # create a cohort class. this will have an ID, graduation date, and list of students (many students to one cohort). I can also give it a name, though this isn't vital (I could use the id as a sort of name)
 class Cohort(db.Model):
@@ -58,6 +59,22 @@ class Calculator:
         percentage = round((employed_students / total_students) * 100, 1)
         return percentage
  
+    #  function to display students in a bar graph
+    def bar_graph_of_employed_status(self, cohort):
+        employed_students = self.count_employed_students(cohort)
+        not_employed = self.count_students(cohort) - employed_students
+        numbers = [employed_students, not_employed]
+        titles = ["employed", "not employed"]
+        x_values= range(2)
+        plt.bar(x_values, numbers)
+        ax = plt.subplot()
+        length = len(x_values)
+        ax.set_xticks(range(length))
+        ax.set_xticklabels(titles)
+        chart = plt.savefig('chart.png')
+        return chart
+
+# five-number summary
 
 #  //////
 # def calculate_average_days_to_get_software_job(self, cohort):
