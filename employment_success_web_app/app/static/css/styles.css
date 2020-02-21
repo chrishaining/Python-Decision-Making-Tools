@@ -64,7 +64,6 @@ textarea {
 /* table */
 
 .table {
-    color: white;
     padding: 10px
 }
 
@@ -100,5 +99,4 @@ button.save.btn.btn-default:hover {
 
 li {
     list-style-type: none;
-    color: white
 }
