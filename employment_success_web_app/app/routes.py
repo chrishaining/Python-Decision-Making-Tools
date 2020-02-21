@@ -39,6 +39,14 @@ def create():
     return redirect('/students')
 
 # function to edit a student
+@app.route('/students/<int:student_id>/edit', methods=['GET', 'POST'])
+def edit_student(student_id):
+    student_to_edit = Student.query.get(student_id)
+    db.session.update(student_to_edit)
+    db.session.commit()
+    return redirect('/students')
+
+# function to delete a student
 @app.route('/students/<int:student_id>/delete', methods=['POST'])
 def delete_student(student_id):
     student_to_delete = Student.query.get(student_id)
