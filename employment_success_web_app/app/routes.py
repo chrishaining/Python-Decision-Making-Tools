@@ -42,7 +42,8 @@ def create():
 @app.route('/students/<int:student_id>/edit', methods=['GET', 'POST'])
 def edit_student(student_id):
     student_to_edit = Student.query.get(student_id)
-    db.session.update(student_to_edit)
+    first_name = request.form['first_name']
+    last_name = request.form['last_name']
     db.session.commit()
     return redirect('/students')
 
