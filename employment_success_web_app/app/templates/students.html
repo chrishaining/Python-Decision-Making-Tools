@@ -11,6 +11,7 @@
             <thead class="thead-light">
                 <tr>
                     <th>Name</th>
+                    <th>ID</th>
                     <th>Employed?</th>
                     <th>Employment start date</th>
                     <th>Software job?</th>
@@ -22,6 +23,7 @@
                 {% for student in students %}
                 <tr>
                     <td>{{student.first_name}} {{student.last_name}}</td>
+                    <td>{{student.id}}</td>
                     <td> {{student.employed}}</td>
                     <td> {{student.start_date}}</td>
                     <td> {{student.software_job}}</td>
