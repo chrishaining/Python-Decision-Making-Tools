@@ -9,9 +9,20 @@
         <h2>All the surveys</h2>
     </div>
     <div class="row">
-        {% for survey in surveys %}
-        <p>{{ survey.question_one }}</p>
-        {% endfor %}
+        <table class="table table-striped table-bordered table-responsive-sm table-hover">
+            <thead>
+                <th>Survey ID</th>
+                <th>Survey text</th>
+            </thead>
+            <tbody>
+                {% for survey in surveys %}
+                <tr>
+                    <td>{{survey.id}}</td>
+                    <td>{{ survey.question_one }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 
     <div class="row">
