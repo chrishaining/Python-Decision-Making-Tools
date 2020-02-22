@@ -1,12 +1,14 @@
 {% extends "base.html" %} {% block content %}
 <div class="container-fluid">
     <div class="row">
-        <h1>Hi!</h1>
-        <p>Welcome to the statistics page</p>
+        <h1>Welcome to the statistics page</h1>
     </div>
 
     <div class="row">
         <h2>Some stats</h2>
+    </div>
+
+    <div class="row">
         <ul>
             {% if number_of_students == 1 %}
             <li>There is {{number_of_students}} student.</li>

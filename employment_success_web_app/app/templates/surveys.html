@@ -1,13 +1,14 @@
 {% extends "base.html" %} {% block content %}
 <div class="container-fluid">
     <div class="row">
-        <h1>Hi!</h1>
-        <p>Welcome to the survey page</p>
+        <h1>Welcome to the survey page</h1>
     </div>
 
 
     <div class="row">
         <h2>All the surveys</h2>
+    </div>
+    <div class="row">
         {% for survey in surveys %}
         <p>{{ survey.question_one }}</p>
         {% endfor %}
