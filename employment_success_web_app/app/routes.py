@@ -73,12 +73,10 @@ def show_statistics():
 
 @app.route('/surveys')
 def show_surveys(): 
-    # surveyReader = SurveyReader()
-    # fish_survey = "I am a little fish. I love to eat maggots. And other fish. Mmm - maggots. Also, flies and algae."
     surveys = Survey.query.all()
     return render_template('surveys.html', title='Surveys', surveys=surveys)
 
-    # function to add a survey
+# function to add a survey
 @app.route('/surveys', methods=['POST'])
 def create_survey():
     question_one = request.form['question_one']
