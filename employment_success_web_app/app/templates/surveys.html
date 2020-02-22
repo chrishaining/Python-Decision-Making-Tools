@@ -5,16 +5,51 @@
         <p>Welcome to the survey page</p>
     </div>
 
+
     <div class="row">
-        <h2>Here's the survey</h2>
-        <p>{{ survey }}</p>
+        <h2>All the surveys</h2>
+        {% for survey in surveys %}
+        <p>{{ survey.question_one }}</p>
+        {% endfor %}
     </div>
 
     <div class="row">
-        <h2>The frequency of words in the survey:</h2>
-        {% for word, frequency in word_count.items() %}
-        <p>{{ word }}: {{ frequency }}</p>
+        <h2>Word counts</h2>
+
+        {% for survey in surveys %}
+        <div class="col-md-3">
+            <h3>Survey {{survey.id}}</h3>
+            <table class="table table-striped table-bordered table-responsive-sm table-hover">
+                <thead>
+                    <th>Word</th>
+                    <th>Frequency</th>
+                </thead>
+                <tbody>
+                    {% for word, frequency in survey.count_words() %}
+                    <tr>
+
+                        <td>
+                            {{word}}</td>
+                        <td>{{frequency}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
         {% endfor %}
+
+    </div>
+
+
+
+
+    <div class=" row ">
+        <h2>Add a survey</h2>
+        <form action="/surveys " method="POST ">
+            <label for="question_one ">Describe your experience of the course</label>
+            <input type="text " name="question_one " id="question_one " required/>
+            <button type="submit " class="save btn btn-default " value="Add Student ">Add Survey</button>
+        </form>
     </div>
 
 </div>

@@ -1,0 +1,19 @@
+    <!-- <div class="row">
+        <h2>The frequency of words in the survey:</h2>
+        {% for word, frequency in word_count.items() %}
+        <p>{{ word }}: {{ frequency }}</p>
+        {% endfor %}
+    </div> -->
+
+       <!-- <div class="row">
+        <h2>Here's the survey</h2>
+        <p>{{ fish_survey }}</p>
+    </div> -->
+
+
+       <!-- <div class="row">
+        <h2>The frequency of words in the survey:</h2>
+        {% for word, frequency in word_count.items() %}
+        <p>{{ word }}: {{ frequency }}</p>
+        {% endfor %}
+    </div> -->

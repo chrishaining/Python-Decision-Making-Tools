@@ -1,5 +1,5 @@
 from app import app, db
-from app.models import Student, Calculator, SurveyReader
+from app.models import Student, Calculator, SurveyReader, Survey
 from flask import render_template, request, redirect
 import datetime
 
@@ -24,7 +24,7 @@ def show_students():
 
 # function to add a student
 @app.route('/students', methods=['POST'])
-def create():
+def create_student():
     studentFirstName = request.form['first_name']
     studentLastName = request.form['last_name']
     # studentEmployed = request.form['employed'] disabled until I can work out how to use booleans with forms
@@ -73,8 +73,16 @@ def show_statistics():
 
 @app.route('/surveys')
 def show_surveys(): 
-    # text2 = "I am a little fish. I love to eat maggots. And other fish. Mmm - maggots. Also, flies and algae."
-    surveyReader = SurveyReader()
-    survey = "I am a little fish. I love to eat maggots. And other fish. Mmm - maggots. Also, flies and algae."
-    word_count = surveyReader.word_count(survey)
-    return render_template('surveys.html', title='Surveys', survey=survey, word_count=word_count)
+    # surveyReader = SurveyReader()
+    # fish_survey = "I am a little fish. I love to eat maggots. And other fish. Mmm - maggots. Also, flies and algae."
+    surveys = Survey.query.all()
+    return render_template('surveys.html', title='Surveys', surveys=surveys)
+
+    # function to add a survey
+@app.route('/surveys', methods=['POST'])
+def create_survey():
+    question_one = request.form['question_one']
+    newSurvey = Survey(question_one=question_one)
+    db.session.add(newSurvey)
+    db.session.commit()
+    return redirect('/surveys')

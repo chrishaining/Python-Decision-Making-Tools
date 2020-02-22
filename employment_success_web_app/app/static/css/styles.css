@@ -44,6 +44,11 @@ nav {
     margin: 10px;
 }
 
+.col {
+    display: flex;
+    flex-wrap: wrap
+}
+
 
 /* form */
 

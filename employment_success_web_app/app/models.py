@@ -1,6 +1,16 @@
 from app import db
 import datetime
 import matplotlib.pyplot as plt
+from wordcloud import WordCloud, STOPWORDS
+import numpy as np 
+from PIL import Image
+
+import re, nltk
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+from nltk.stem import WordNetLemmatizer
+from collections import Counter
+from app.part_of_speech import get_part_of_speech
 
 # create a cohort class. this will have an ID, graduation date, and list of students (many students to one cohort). I can also give it a name, though this isn't vital (I could use the id as a sort of name)
 class Cohort(db.Model):
@@ -8,6 +18,8 @@ class Cohort(db.Model):
     cohort_name = db.Column(db.String(64), index=True, nullable=False)
     graduation_date = db.Column(db.DateTime(), default=datetime.datetime.utcnow, nullable=True)
     students = db.relationship('Student', backref='cohort', lazy='dynamic')
+    surveys = db.relationship('Survey', backref='cohort', lazy='dynamic')
+
 
     def __repr__(self):
         return '<Cohort {}>'.format(self.cohort_name)
@@ -24,6 +36,38 @@ class Student(db.Model):
     
     def __repr__(self):
         return '<Student {} {}>'.format(self.first_name, self.last_name)
+
+# create a survey class. It has a cohort.id foreign key - I chose this over student.id as a survey should be anonymous, though the counter-argument is that now multiple surveys for the same student could be used.
+class Survey(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    question_one = db.Column(db.String(64), index=True, nullable=True)
+    cohort_id = db.Column(db.Integer, db.ForeignKey('cohort.id'))
+    
+    def __repr__(self):
+        return '<Survey {}>'.format(self.question_one)
+
+    def count_words(self):
+        text_to_read = self.question_one.lower()
+        cleaned = re.sub('\W+', ' ', text_to_read)
+        tokenized = word_tokenize(cleaned)
+        stop_words = stopwords.words('english')
+        filtered = [word for word in tokenized if word not in stop_words]
+        normalizer = WordNetLemmatizer()
+        normalized = [normalizer.lemmatize(token, get_part_of_speech(token)) for token in filtered]
+        bag_of_looking_glass_words = Counter(normalized)
+        return bag_of_looking_glass_words.items()
+
+    # def display_count_words(self):
+    #     words = self.count_words()
+    #     for word, frequency in words:
+
+    #     split_words = ["{}: {}".format(word, frequency) for word, frequency in words.items()]
+    #     for key, value in words.items():
+    #         return "{}{}".format(key, value)
+    #     return "{}{}".format(words.keys(), words.values())
+    #     return split_words
+
+      
 
 # I'm going to attempt to do the calculations within a class (the other option would be to do all the functions in routes.py). I'm not sure how to create a class - use normal python or db.Model?
 class Calculator:
@@ -132,17 +176,7 @@ class Calculator:
         return percentage
 
 # create a survey reader
-import matplotlib.pyplot as pPlot
-from wordcloud import WordCloud, STOPWORDS
-import numpy as np 
-from PIL import Image
 
-import re, nltk
-from nltk.corpus import stopwords
-from nltk.tokenize import word_tokenize
-from nltk.stem import WordNetLemmatizer
-from collections import Counter
-from app.part_of_speech import get_part_of_speech
 
 
 class SurveyReader:
@@ -162,8 +196,8 @@ class SurveyReader:
 
 # import the text
     def word_count(self, survey):
-        # text1 = open(survey, encoding='utf-8').read().lower()
-        text1 = survey.lower()
+        text_to_read = survey.question_one
+        text1 = open(text_to_read, encoding='utf-8').read().lower()
         cleaned = re.sub('\W+', ' ', text1).lower()
         tokenized = word_tokenize(cleaned)
         stop_words = stopwords.words('english')
