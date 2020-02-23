@@ -84,3 +84,9 @@ def create_survey():
     db.session.add(newSurvey)
     db.session.commit()
     return redirect('/surveys')
+
+# this route is only to test the modals.
+@app.route('/modals')
+def show_modals(): 
+    explanation = "This page is for testing modals"
+    return render_template('modals.html', explanation=explanation)
