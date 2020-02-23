@@ -108,6 +108,19 @@ button.save.btn.btn-default:hover {
     color: white;
 }
 
+button.btn.btn-primary:hover {
+    color: #ffd700;
+}
+
+button.btn.btn-secondary {
+    color: white;
+    margin: 10px;
+}
+
+button.btn.btn-secondary:hover {
+    color: #ffd700;
+}
+
 
 /* lists */
 

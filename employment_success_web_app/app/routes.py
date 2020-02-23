@@ -42,10 +42,15 @@ def create_student():
 @app.route('/students/<int:student_id>/edit', methods=['GET', 'POST'])
 def edit_student(student_id):
     student_to_edit = Student.query.get(student_id)
-    first_name = request.form['first_name']
-    last_name = request.form['last_name']
-    db.session.commit()
-    return redirect('/students')
+    if student_to_edit: 
+        # first_name = request.form['first_name']
+        first_name = student_to_edit.first_name
+        last_name = student_to_edit.last_name
+        # last_name = request.form['last_name']
+        db.session.commit()
+        return redirect('/students')
+    return render_template('students.html', first_name=first_name, last_name=last_name)
+
 
 # function to delete a student
 @app.route('/students/<int:student_id>/delete', methods=['POST'])
@@ -54,6 +59,7 @@ def delete_student(student_id):
     db.session.delete(student_to_delete)
     db.session.commit()
     return redirect('/students')
+
 
 
 @app.route('/statistics')
