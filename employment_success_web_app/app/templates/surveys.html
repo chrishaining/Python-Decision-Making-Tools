@@ -13,7 +13,8 @@
             <thead>
                 <th>Survey ID</th>
                 <th>Survey text</th>
-                <th>Modal</th>
+                <th></th>
+                <th></th>
             </thead>
             <tbody>
                 {% for survey in surveys %}
@@ -22,7 +23,6 @@
                     <td>{{ survey.question_one }}</td>
 
                     <td>
-                        <!-- modal. note that to make sure there is a unique modal for each item in loop, I add suurvey.id in the data-target, ie. "#myModal{{survey.id}}" -->
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal{{survey.id}}">See Word Count
                         </button>
                         <div class="modal fade" id="myModal{{survey.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -44,7 +44,6 @@
                                             <tbody>
                                                 {% for word, frequency in survey.count_words() %}
                                                 <tr>
-
                                                     <td>
                                                         {{word}}</td>
                                                     <td>{{frequency}}</td>
@@ -52,11 +51,6 @@
                                                 {% endfor %}
                                             </tbody>
                                         </table>
-
-
-
-
-
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -66,40 +60,39 @@
                         </div>
                     </td>
 
+                    <td>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myCountModal{{ survey.id }}">Delete Survey
+                        </button>
+                        <div class="modal fade" id="myCountModal{{ survey.id }}" tabindex="-1" role="dialog" aria-labelledby="myCountModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="myCountModalLabel">
+                                            Survey Details
+                                        </h5>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>{{survey.question_one}}</p>
+                                        <p>Are you sure you want to delete this survey?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <form action="{{url_for('delete_survey', survey_id=survey.id)}}" method="POST">
+                                            <button type="submit" class="save btn btn-default" value="Delete Survey">Delete Survey</button>
+                                        </form>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No, take me
+                                            back</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
 
-    <div class="row">
-        <h2>Word counts</h2>
-    </div>
 
-    <div class="row">
-
-        {% for survey in surveys %}
-        <div class="col-md-3">
-            <h3>Survey {{survey.id}}</h3>
-            <table class="table table-striped table-bordered table-responsive-sm table-hover">
-                <thead>
-                    <th>Word</th>
-                    <th>Frequency</th>
-                </thead>
-                <tbody>
-                    {% for word, frequency in survey.count_words() %}
-                    <tr>
-
-                        <td>
-                            {{word}}</td>
-                        <td>{{frequency}}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-        {% endfor %}
-    </div>
 
 
     <div class="row ">

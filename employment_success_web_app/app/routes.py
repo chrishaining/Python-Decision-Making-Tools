@@ -91,8 +91,10 @@ def create_survey():
     db.session.commit()
     return redirect('/surveys')
 
-# this route is only to test the modals.
-@app.route('/modals')
-def show_modals(): 
-    explanation = "This page is for testing modals"
-    return render_template('modals.html', explanation=explanation)
+# function to delete a survey
+@app.route('/surveys/<int:survey_id>/delete', methods=['POST'])
+def delete_survey(survey_id):
+    survey_to_delete = Survey.query.get(survey_id)
+    db.session.delete(survey_to_delete)
+    db.session.commit()
+    return redirect('/surveys')

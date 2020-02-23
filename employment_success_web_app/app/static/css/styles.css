@@ -45,7 +45,7 @@ nav {
     padding: 10px;
     display: flex;
     flex-wrap: wrap;
-    /* border: solid #080F5B 2px; */
+    border: solid #080F5B 2px;
 }
 
 .col {

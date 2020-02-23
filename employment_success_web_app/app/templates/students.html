@@ -18,7 +18,6 @@
                     <th>Employment start date</th>
                     <th>Software job?</th>
                     <th></th>
-                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -30,17 +29,8 @@
                     <td> {{student.start_date}}</td>
                     <td> {{student.software_job}}</td>
                     <td>
-                        <form action="{{url_for('delete_student', student_id=student.id)}}" method="POST">
-
-                            <button type="submit" class="save btn btn-default" value="Delete Student">Delete Student</button>
-                        </form>
-                    </td>
-
-
-                    <td>
-                        <!-- modal. note that to make sure there is a unique modal for each item in loop, I add card.id in the data-target -->
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal{{ student.id }}">Edit Student
-                    </button>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal{{ student.id }}">View Student
+                        </button>
                         <div class="modal fade" id="myModal{{ student.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -50,39 +40,21 @@
                                         </h5>
                                     </div>
                                     <div class="modal-body">
-
-                                        <form action="/students/{{ student.id }}/edit" method="POST">
-                                            <label for="first_name">First Name</label>
-                                            <input type="text" name="first_name" id="first_name" placeholder="{{student.first_name}}" required/>
-                                            <label for="last_name">Last Name</label>
-                                            <input type="text" name="last_name" id="last_name" placeholder="{{student.last_name}}" required/>
-                                        </form>
-
+                                        {{student.first_name}} {{student.last_name}}
+                                        <h5>Are you sure you want to delete this student?</h5>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary">
-                                            <!-- <a href="{{url_for('edit_student', student_id=student.id)}}" >Update</a> -->
+                                        <form action="{{url_for('delete_student', student_id=student.id)}}" method="POST">
 
-                                            <!-- <a href="/students/{{ student.id }}/edit">Update</a> -->
-                                            <a href="{{url_for('edit_student', student_id=student.id)}}">Update</a>
-
-
-                                            
-
-                                        </button>
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="submit" class="save btn btn-default" value="Delete Student">Delete Student</button>
+                                        </form>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No, take me
+                                            back</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </td>
-
-
-
-
-
-
-
                 </tr>
                 {% endfor %}
 
@@ -90,37 +62,15 @@
         </table>
     </div>
 
-    <!-- <div class="row">
-        <h2>Some stats</h2>
-        <ul>
-            <li>There are {{number_of_students}} students.</li>
-            <li>{{employed_students}} of these students are employed.</li>
-            <li>{{students_in_software_jobs}} of these students have a software job.</li>
-            <li>{{percentage_of_employed_students}} % of students are employed.</li>
-            <li>{{percentage_in_software_jobs}} % of students have a software job.</li>
-            <li>{{non_software}} % of students are not in a software job.</li>
-
-        </ul>
-
-
-    </div> -->
-
     <div class="row">
         <h2>Add a new student</h2>
         <form action="/students" method="POST">
             <label for="first_name">First Name</label>
-            <input type="text" name="first_name" id="first_name" required/>
+            <input type="text" name="first_name" id="first_name" required />
             <label for="last_name">Last Name</label>
-            <input type="text" name="last_name" id="last_name" required/>
-            <!-- <label for="employed ">Is this student employed?</label>
-        <input type="checkbox " checked name="employed " id="employed " disabled/> -->
-
-
+            <input type="text" name="last_name" id="last_name" required />
             <label for="start_date">What date did they start their job?</label>
             <input type="date" name="start_date" id="start_date" />
-            <!-- <label for="software_job ">Do they have a software job?</label>
-        <input type="checkbox " checked name="software_job " id="software_job " disabled/> -->
-
             <button type="submit" class="save btn btn-default" value="Add Student">Add Student</button>
         </form>
     </div>
