@@ -51,6 +51,13 @@ def edit_student(student_id):
         return redirect('/students')
     return render_template('students.html', first_name=first_name, last_name=last_name)
 
+@app.route('/students/<int:student_id>/update', methods=['POST'])
+def update_student(student_id):
+    student = Student.query.get(student_id)
+    student.software_job = True 
+    db.session.commit()
+    return redirect('/students')
+
 
 # function to delete a student
 @app.route('/students/<int:student_id>/delete', methods=['POST'])
