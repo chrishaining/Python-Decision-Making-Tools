@@ -23,6 +23,15 @@ nav {
     background-color: #080F5B;
 }
 
+nav a {
+    color: white
+}
+
+nav a:hover {
+    color: gold;
+    text-decoration: none;
+}
+
 .navbar-toggler-icon {
     color: white;
     padding-left: 20px;
@@ -46,6 +55,7 @@ nav {
     display: flex;
     flex-wrap: wrap;
     border: solid #080F5B 2px;
+    background-color: #EDB5BF
 }
 
 .col {
@@ -100,12 +110,13 @@ th {
 /* buttons */
 
 button.save.btn.btn-default {
-    background-color: #15DB95;
+    background-color: #006400;
+    color: white;
     margin: 10px
 }
 
 button.save.btn.btn-default:hover {
-    color: white;
+    color: #ffd700;
 }
 
 button.btn.btn-primary:hover {
